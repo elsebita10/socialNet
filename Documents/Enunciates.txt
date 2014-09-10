@@ -1,0 +1,36 @@
+Se desea modelar e implementar un módulo de gestión de documental para una red social contemplando distintos tipos de contenidos, 
+pueden ser fotos, documentos, videos, etc. Según su tipo se desean almacenar distintas características:
+Contenido documento:  (Titulo, Autor/es, formato [pdf, doc, etc], paginas, descripción, url)
+Contenido foto: (descripción, labels [(x,y):Label], url)
+Contenido video: (formato, calidad, duración, descripción, url)
+De cada contenido se desea conocer quien fue el usuario que lo publico, cuando lo publico y su estado de publicación. 
+Dado que el usuario puede cargar el contenido en varias etapas hasta que  no se publique, el  contenido no puede hacerse público o 
+puede hacerse público si el usuario así lo desea cargando una fecha de publicación (publicación automática).
+Cada contenido puede estar destinado a distintos tipos de públicos: Todos (sería como el apta para todo público de las películas), 
+ mayores de cierta edad (18, 16, 13), infantil o por sexo.
+Por ende el sistema debe tener la siguiente funcionalidad:
+Agregar, Modificar, Borrar documentos (fotos, archivos o videos) en forma individual o grupal.
+Publicar un documento (en forma manual o automática)
+Realizar búsquedas:
+En primera instancia el servicio de búsquedas no  aplica filtros de tipo de publico para búsquedas anónimas 
+(donde se desconoce el usuario), sí lo hace para el caso de que se conozca el usuario que esta realizando la búsqueda.
+La búsqueda se debe realizar sobre los distintos tipos de contenidos o sobre uno en particular o sobre algunos de 
+los atributos de estos.
+Debe filtrar los contenidos que no están publicados, salvo que sea el mismo usuario quien lo publica (owner) el que sea quien lo esta buscando.
+Ver detalle del documento: Si se conoce quien pide el detalle del documento se puede evaluar si el contenido es apto para él sino se debe denegar el acceso al mismo hasta que se identifique al usuario.
+
+
+usar:
+contenedor web: tipo tomcat
+base de datos SQL:  in-memory.
+Framework ORM: Hibernate
+Spring
+Los servicios que el sistema provee se deben publicar utilizando REST (JAX-RS).
+El intercambio de información (payload) entre el cliente y el servicio debe realizarse en formato JSON.
+Se debe utilizar Maven para el manejo de dependencias y como herramienta de build.
+Setup mínimo en la maquina donde se ejecutaría la app. Por lo que se debería contar con un setup que inicialice la base con
+los parámetros mínimos para el sistema funcione.
+No es necesario implementar el upload de los documentos, solamente nos interesa persistir la info relacionada.
+No es necesario implementar autenticación, pero si tener la info en la base del usuario (este es un ejemplo de información que
+se necesita inicializar con el setup) para asociar los contenidos y aplicar los filtros de contenidos a las búsquedas.
+Se deben construir test cases usando junit o testng
